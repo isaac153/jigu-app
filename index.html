@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+
 <title>지구촌교회</title>
+
+<!-- PWA 필수 메타태그 -->
 
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -15,6 +18,7 @@
 <meta name="msapplication-TileColor" content="#1B4B8A">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%231B4B8A'%2F%3E%3Ctext x='96' y='130' font-size='110' text-anchor='middle'%3E⛪%3C/text%3E%3C/svg%3E">
 
+<!-- PWA Manifest (인라인 → 단일 HTML 파일로 완결) -->
 <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%EC%A7%80%EA%B5%AC%EC%B4%8C%EA%B5%90%ED%9A%8C%22%2C%22short_name%22%3A%22%EC%A7%80%EA%B5%AC%EC%B4%8C%22%2C%22description%22%3A%22%EC%A7%80%EA%B5%AC%EC%B4%8C%EA%B5%90%ED%9A%8C%20%ED%86%B5%ED%95%A9%20%EC%95%B1%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%231B4B8A%22%2C%22theme_color%22%3A%22%231B4B8A%22%2C%22lang%22%3A%22ko%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D'http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg'%2520viewBox%253D'0%25200%2520192%2520192'%253E%253Crect%2520width%253D'192'%2520height%253D'192'%2520rx%253D'40'%2520fill%253D'%25231B4B8A'%252F%253E%253Ctext%2520x%253D'96'%2520y%253D'130'%2520font-size%253D'110'%2520text-anchor%253D'middle'%253E%25E2%259B%25AA%253C%252Ftext%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D'http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg'%2520viewBox%253D'0%25200%2520512%2520512'%253E%253Crect%2520width%253D'512'%2520height%253D'512'%2520rx%253D'100'%2520fill%253D'%25231B4B8A'%252F%253E%253Ctext%2520x%253D'256'%2520y%253D'360'%2520font-size%253D'300'%2520text-anchor%253D'middle'%253E%25E2%259B%25AA%253C%252Ftext%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -801,22 +805,17 @@ html, body {
   display: none;
   position: fixed;
   bottom: calc(90px + env(safe-area-inset-bottom, 0px));
-  left: 50%;
-  transform: translateX(-50%);
+  left: 50%; transform: translateX(-50%);
   background: rgba(26,38,64,0.92);
   color: white;
   padding: 10px 20px;
   border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 13px; font-weight: 500;
   white-space: nowrap;
   z-index: 200;
   animation: fadeIn 0.2s ease;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
 
 /* ==================== PRAYER BOARD ==================== */
 .prayer-card {
@@ -831,33 +830,64 @@ html, body {
 .prayer-member-info .prayer-person { font-size: 15px; font-weight: 700; color: var(--text-1); }
 .prayer-date { font-size: 11px; color: var(--text-3); }
 .prayer-items { list-style: none; }
-.prayer-items li { font-size: 13px; color: var(--text-2); line-height: 1.6; padding: 5px 0; border-bottom: 1px solid var(--surface-3); padding-left: 14px; position: relative; }
+.prayer-items li {
+  font-size: 13px; color: var(--text-2); line-height: 1.6;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--surface-3);
+  padding-left: 14px;
+  position: relative;
+}
 .prayer-items li:last-child { border-bottom: none; }
 .prayer-items li::before { content: '🙏'; position: absolute; left: -2px; font-size: 11px; }
 
-.share-btn { display: flex; align-items: center; gap: 6px; padding: 8px 14px; background: #FEE500; border: none; border-radius: var(--radius-m); font-size: 12px; font-weight: 600; color: #3A1D1D; cursor: pointer; font-family: inherit; margin: 4px 20px 16px; }
+.share-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  background: #FEE500;
+  border: none;
+  border-radius: var(--radius-m);
+  font-size: 12px; font-weight: 600;
+  color: #3A1D1D;
+  cursor: pointer;
+  font-family: inherit;
+  margin: 4px 20px 16px;
+}
 
 /* Animations */
 .screen { animation: none; }
 .screen.active { animation: screenIn 0.22s cubic-bezier(0.25,0.46,0.45,0.94); }
 @keyframes screenIn {
   from { opacity: 0; transform: translateX(16px); }
-  to { opacity: 1; transform: translateX(0); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 </style>
 </head>
 <body>
 
 <div class="phone">
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <span>📶</span>
+      <span>🔋</span>
+    </div>
+  </div>
+
+  <!-- ========== HOME SCREEN ========== -->
   <div class="screen active" id="home">
     <div class="scroll-area">
-      <div class="home-header">
+      <!-- Header -->
+      <div id="home" class="home-header">
         <div class="header-row" style="padding-top: 4px;">
           <div>
             <p class="greeting">지구촌교회 앱에 오신 것을 환영합니다.</p>
-            <strong style="color:white;font-size:18px;font-weight:700;display:block;margin-top:2px;">김지구A 집사님 👋</strong>
+            <strong class="greeting" style="color:white;font-size:18px;font-weight:700;display:block;margin-top:2px;">김지구A 집사님 👋</strong>
           </div>
-          <button class="notif-btn" onclick="showToast('알림 3건이 있습니다')"> 🔔 <span class="notif-dot"></span> </button>
+          <button class="notif-btn" onclick="showToast('알림 3건이 있습니다')">
+            🔔
+            <span class="notif-dot"></span>
+          </button>
         </div>
         <div class="quick-cards">
           <div class="quick-card" onclick="navigate('report')">
@@ -872,581 +902,982 @@ html, body {
             <div class="qc-icon">🏠</div>
             <div class="qc-label">공간 예약</div>
           </div>
-          <div class="quick-card" onclick="showToast('신청 서비스 준비중입니다.')">
+          <div class="quick-card" onclick="showToast('신청 서비스')">
             <div class="qc-icon">📝</div>
             <div class="qc-label">신청 서비스</div>
           </div>
         </div>
       </div>
 
+      <!-- Worship section -->
       <div class="section">
         <div class="section-title">예배와 말씀</div>
-        <div class="worship-card" onclick="navigate('sermons')">
-          <div class="worship-thumbnail">📺</div>
+      </div>
+      <div style="padding: 0 20px;">
+        <div class="worship-card" onclick="navigate('sermon')">
+          <div class="worship-thumbnail">🎙️</div>
           <div class="worship-info">
-            <span class="tag">주일예배생중계</span>
-            <div class="title">2026년 5월 31일 주일 낮 예배</div>
-            <div class="sub">오전 10:00시 온·오프라인 동시 예배</div>
+            <span class="tag">최신 설교</span>
+            <div class="title">주일예배 담임목사 설교</div>
+            <div class="sub">2026.05.25 · 창세기 1:1-3</div>
           </div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">주요 메뉴</div>
+      <!-- Notice -->
+      <div class="section-title" style="padding: 12px 20px 8px; margin:0; font-size:14px; font-weight:700; color:var(--text-1); display:flex; align-items:center; gap:6px;">
+        <span style="content:'';width:3px;height:14px;background:var(--primary);border-radius:2px;display:inline-block;"></span>
+        공지사항
+      </div>
+      <div class="notice-card" onclick="showToast('공지사항을 확인합니다')">
+        <div class="notice-tag">📢 공지</div>
+        <div class="notice-title">2026년 상반기 교육 신청 안내</div>
+        <div class="notice-date">2026.05.20</div>
+      </div>
+      <div class="notice-card" style="background: var(--primary-pale); border-left-color: var(--primary);" onclick="showToast('공지사항을 확인합니다')">
+        <div class="notice-tag" style="color:var(--primary);">📌 안내</div>
+        <div class="notice-title">6월 목장나눔지 업로드 완료</div>
+        <div class="notice-date">2026.05.18</div>
+      </div>
+
+      <!-- Menu grid -->
+      <div class="section-title" style="padding: 16px 20px 8px; margin:0; font-size:14px; font-weight:700; color:var(--text-1); display:flex; align-items:center; gap:6px;">
+        <span style="width:3px;height:14px;background:var(--primary);border-radius:2px;display:inline-block;"></span>
+        교회 서비스
       </div>
       <div class="menu-grid">
-        <div class="menu-item" onclick="navigate('report')">
-          <div class="menu-icon" style="background:#EBF2FF;color:#1B4B8A;">📊</div>
-          <div class="menu-label">목장보고</div>
+        <div class="menu-item" onclick="navigate('sermon')">
+          <div class="menu-icon" style="background:#EBF2FF;">🎙️</div>
+          <div class="menu-label">설교</div>
+        </div>
+        <div class="menu-item" onclick="showToast('주보를 엽니다')">
+          <div class="menu-icon" style="background:#FFF3D6;">📄</div>
+          <div class="menu-label">주보</div>
+        </div>
+        <div class="menu-item" onclick="showToast('목장나눔지를 엽니다')">
+          <div class="menu-icon" style="background:#E6F7EF;">🌿</div>
+          <div class="menu-label">목장나눔지</div>
+        </div>
+        <div class="menu-item" onclick="showToast('매일성경 QT')">
+          <div class="menu-icon" style="background:#FEF0F0;">📖</div>
+          <div class="menu-label">매일성경QT</div>
+        </div>
+        <div class="menu-item" onclick="showToast('중보기도 신청')">
+          <div class="menu-icon" style="background:#F3EEFF;">🙏</div>
+          <div class="menu-label">중보기도</div>
+        </div>
+        <div class="menu-item" onclick="showToast('교육 신청')">
+          <div class="menu-icon" style="background:#E6F7EF;">🎓</div>
+          <div class="menu-label">교육신청</div>
         </div>
         <div class="menu-item" onclick="navigate('room')">
-          <div class="menu-icon" style="background:#FFF3D6;color:#E8A020;">🔑</div>
+          <div class="menu-icon" style="background:#FFF3D6;">🏢</div>
           <div class="menu-label">공간예약</div>
         </div>
-        <div class="menu-item" onclick="navigate('sermons')">
-          <div class="menu-icon" style="background:#E6F7EF;color:#2DAB6A;">📖</div>
-          <div class="menu-label">설교방송</div>
-        </div>
-        <div class="menu-item" onclick="showToast('교회소식 서비스 준비중입니다.')">
-          <div class="menu-icon" style="background:#FEF0F0;color:#E03B3B;">📢</div>
+        <div class="menu-item" onclick="showToast('교회 소식')">
+          <div class="menu-icon" style="background:#EBF2FF;">📰</div>
           <div class="menu-label">교회소식</div>
         </div>
       </div>
+      <div style="height: 20px;"></div>
+    </div>
 
-      <div class="section">
-        <div class="section-title">공지사항</div>
+    <div class="bottom-nav">
+      <div class="nav-item active" onclick="navigate('home')">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">홈</span>
       </div>
-      <div class="notice-card" onclick="showToast('공지사항 본문 준비중입니다.')">
-        <div class="notice-tag">필독</div>
-        <div class="notice-title">2026 지구촌 은혜 성회 안내 및 일정</div>
-        <div class="notice-date">지구촌교회 행정실 • 2026.05.20</div>
+      <div class="nav-item" onclick="navigate('sermon')">
+        <span class="nav-icon">🎙️</span>
+        <span class="nav-label">설교</span>
+      </div>
+      <div class="nav-item" onclick="navigate('prayer')">
+        <span class="nav-icon">📋</span>
+        <span class="nav-label">소식</span>
+        <span class="badge">3</span>
+      </div>
+      <div class="nav-item" onclick="navigate('my')">
+        <span class="nav-icon">👤</span>
+        <span class="nav-label">MY</span>
+      </div>
+      <div class="nav-item" onclick="showToast('교회 홈페이지로 이동합니다')">
+        <span class="nav-icon">⛪</span>
+        <span class="nav-label">교회</span>
       </div>
     </div>
   </div>
 
+  <!-- ========== MY INFO SCREEN ========== -->
+  <div class="screen" id="my">
+    <div class="app-header">
+      <button class="back-btn" onclick="navigate('home')">←</button>
+      <span class="title">나의 정보</span>
+      <button class="action-btn" onclick="showToast('정보를 수정합니다')">✏️</button>
+    </div>
+
+    <div class="scroll-area">
+      <!-- Profile -->
+      <div class="my-header">
+        <div class="profile-card">
+          <div class="profile-avatar">😊</div>
+          <div>
+            <div class="profile-name">김지구A</div>
+            <div class="profile-sub">수지 1지구 아름다운C 목장</div>
+            <div class="profile-sub" style="margin-top:2px;">010-3333-4444</div>
+            <span class="profile-badge">서리집사</span>
+          </div>
+          <div class="qr-btn" onclick="showQR()">
+            <span class="qr-icon">▣</span>
+            QR보기
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="info-tabs">
+        <div class="info-tab active" onclick="switchInfoTab(0, this)">교적정보</div>
+        <div class="info-tab" onclick="switchInfoTab(1, this)">교육이력</div>
+        <div class="info-tab" onclick="switchInfoTab(2, this)">헌금현황</div>
+        <div class="info-tab" onclick="switchInfoTab(3, this)">기도제목</div>
+      </div>
+
+      <!-- Tab 0: 교적정보 -->
+      <div class="tab-content active" id="tab-0">
+        <div class="info-section">
+          <div class="info-section-title">교회/신앙정보</div>
+          <div class="info-row"><span class="info-key">교회 등록일</span><span class="info-val">2010.10.05</span></div>
+          <div class="info-row"><span class="info-key">직분</span><span class="info-val">서리집사</span></div>
+          <div class="info-row"><span class="info-key">직분 임명일</span><span class="info-val">2021.05.31</span></div>
+          <div class="info-row"><span class="info-key">침례</span><span class="info-val" style="color:var(--success);">✓ 완료 (2020.04.05)</span></div>
+          <div class="info-row"><span class="info-key">담당교역자</span><span class="info-val">홍길동 목사</span></div>
+        </div>
+        <div class="info-section" style="border-top: 8px solid var(--surface-3);">
+          <div class="info-section-title">목장정보</div>
+          <div class="info-row"><span class="info-key">지구</span><span class="info-val">수지 1지구</span></div>
+          <div class="info-row"><span class="info-key">목장</span><span class="info-val">아름다운C 목장</span></div>
+          <div class="info-row"><span class="info-key">역할</span><span class="info-val">목원</span></div>
+        </div>
+        <div class="info-section" style="border-top: 8px solid var(--surface-3);">
+          <div class="info-section-title">가족정보</div>
+          <div class="info-row"><span class="info-key">김지구A</span><span class="info-val">신앙 세대주</span></div>
+          <div class="info-row"><span class="info-key">유관순B</span><span class="info-val">배우자</span></div>
+          <div class="info-row"><span class="info-key">김유신AD</span><span class="info-val">아들</span></div>
+        </div>
+      </div>
+
+      <!-- Tab 1: 교육이력 -->
+      <div class="tab-content" id="tab-1">
+        <div style="display:flex; gap:8px; padding: 14px 20px;">
+          <button style="flex:1; padding:8px; border-radius:20px; border:1.5px solid var(--primary); background:var(--primary); color:white; font-size:12px; font-weight:600; font-family:inherit; cursor:pointer;">이수 완료</button>
+          <button style="flex:1; padding:8px; border-radius:20px; border:1.5px solid var(--border); background:none; color:var(--text-2); font-size:12px; font-weight:500; font-family:inherit; cursor:pointer;" onclick="showToast('수강 중 목록')">수강 중</button>
+          <button style="flex:1; padding:8px; border-radius:20px; border:1.5px solid var(--border); background:none; color:var(--text-2); font-size:12px; font-weight:500; font-family:inherit; cursor:pointer;" onclick="showToast('직분별 이수 이력')">직분별</button>
+        </div>
+        <div class="edu-item">
+          <div class="edu-status done">수료</div>
+          <div class="edu-info"><div class="edu-name">새생명 교육</div><div class="edu-date">수료일: 2010.10.01</div></div>
+          <span class="edu-arrow">›</span>
+        </div>
+        <div class="edu-item">
+          <div class="edu-status done">수료</div>
+          <div class="edu-info"><div class="edu-name">새가족 교육</div><div class="edu-date">수료일: 2011.09.01</div></div>
+          <span class="edu-arrow">›</span>
+        </div>
+        <div class="edu-item">
+          <div class="edu-status done">수료</div>
+          <div class="edu-info"><div class="edu-name">사역봉사의 길</div><div class="edu-date">수료일: 2012.10.01</div></div>
+          <span class="edu-arrow">›</span>
+        </div>
+        <div class="edu-item">
+          <div class="edu-status ing">수강중</div>
+          <div class="edu-info"><div class="edu-name">목장교회모임 인도법</div><div class="edu-date">개강: 2021.01.01 · 출석 2회</div></div>
+          <span class="edu-arrow">›</span>
+        </div>
+        <div class="edu-item">
+          <div class="edu-status fail">미수료</div>
+          <div class="edu-info"><div class="edu-name">목자의 삶</div><div class="edu-date">개강: 2022.02.01</div></div>
+          <span class="edu-arrow">›</span>
+        </div>
+
+        <!-- 직분 요건 -->
+        <div style="margin: 16px 20px; background: var(--primary-pale); border-radius: var(--radius-l); padding: 14px;">
+          <div style="font-size:13px; font-weight:700; color:var(--primary); margin-bottom:10px;">서리집사 요건 확인</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div style="background:white; border-radius:var(--radius-m); padding:10px; text-align:center;">
+              <div style="font-size:20px; margin-bottom:4px;">✅</div>
+              <div style="font-size:11px; color:var(--text-2);">새가족 수료</div>
+            </div>
+            <div style="background:white; border-radius:var(--radius-m); padding:10px; text-align:center;">
+              <div style="font-size:20px; margin-bottom:4px;">✅</div>
+              <div style="font-size:11px; color:var(--text-2);">침례 완료</div>
+            </div>
+            <div style="background:white; border-radius:var(--radius-m); padding:10px; text-align:center;">
+              <div style="font-size:20px; margin-bottom:4px;">⏳</div>
+              <div style="font-size:11px; color:var(--text-2);">목장참여</div>
+            </div>
+            <div style="background:white; border-radius:var(--radius-m); padding:10px; text-align:center;">
+              <div style="font-size:20px; margin-bottom:4px;">❌</div>
+              <div style="font-size:11px; color:var(--text-2);">목자의삶 수료</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: 헌금현황 -->
+      <div class="tab-content" id="tab-2">
+        <div style="background: var(--surface-2); padding: 14px 20px; font-size:12px; color:var(--text-3); display:flex; align-items:center; gap:6px;">
+          🔒 본인만 조회 가능한 정보입니다
+        </div>
+        <div class="donation-summary">
+          <div class="donation-year">2026년 헌금 현황</div>
+          <div class="donation-amount">3,205,000원</div>
+          <div class="donation-list">
+            <div class="donation-item"><span>2026.05.01</span><span class="amount">500,000</span><span>십일조</span></div>
+            <div class="donation-item"><span>2026.04.01</span><span class="amount">500,000</span><span>십일조</span></div>
+            <div class="donation-item"><span>2026.03.16</span><span class="amount">200,000</span><span>감사헌금</span></div>
+            <div class="donation-item"><span>2026.03.01</span><span class="amount">500,000</span><span>십일조</span></div>
+            <div class="donation-item"><span>2026.02.01</span><span class="amount">505,000</span><span>십일조</span></div>
+          </div>
+        </div>
+        <div style="height:16px;"></div>
+      </div>
+
+      <!-- Tab 3: 기도제목 -->
+      <div class="tab-content" id="tab-3">
+        <div style="padding: 14px 20px 0;">
+          <button class="share-btn" onclick="showToast('카카오톡으로 공유합니다')">
+            💬 카카오톡 공유
+          </button>
+        </div>
+        <div class="prayer-card">
+          <div class="prayer-card-header">
+            <div class="prayer-member-info">
+              <div class="prayer-group">분당 12지구 샬롬목장</div>
+              <div class="prayer-person">이길호</div>
+            </div>
+            <div class="prayer-date">2026.05.06</div>
+          </div>
+          <ul class="prayer-items">
+            <li>새로 시작한 사업장 위에 하나님의 지혜가 함께하여 정직하고 성실한 일터로 세워지게 하소서.</li>
+            <li>믿지 않는 가족들이 주님의 사랑을 경험하여 온 가족이 함께 예배하는 복을 허락하소서.</li>
+          </ul>
+        </div>
+        <div class="prayer-card">
+          <div class="prayer-card-header">
+            <div class="prayer-member-info">
+              <div class="prayer-group">분당 12지구 샬롬목장</div>
+              <div class="prayer-person">김철수</div>
+            </div>
+            <div class="prayer-date">2026.05.06</div>
+          </div>
+          <ul class="prayer-items">
+            <li>최근 건강상의 어려움과 통증을 주님께서 어루만져 주시고 속히 회복되게 하소서.</li>
+            <li>치료 과정 중에 낙심하지 않는 굳건한 믿음을 주시고 마음의 평안을 지켜주소서.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="height: 16px;"></div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="navigate('home')"><span class="nav-icon">🏠</span><span class="nav-label">홈</span></div>
+      <div class="nav-item" onclick="navigate('sermon')"><span class="nav-icon">🎙️</span><span class="nav-label">설교</span></div>
+      <div class="nav-item" onclick="navigate('prayer')"><span class="nav-icon">📋</span><span class="nav-label">소식</span></div>
+      <div class="nav-item active" onclick="navigate('my')"><span class="nav-icon">👤</span><span class="nav-label">MY</span></div>
+      <div class="nav-item" onclick="showToast('교회 홈페이지')"><span class="nav-icon">⛪</span><span class="nav-label">교회</span></div>
+    </div>
+  </div>
+
+  <!-- ========== REPORT SCREEN ========== -->
   <div class="screen" id="report">
     <div class="app-header">
       <button class="back-btn" onclick="navigate('home')">←</button>
-      <div class="title">목장보고서</div>
-      <button class="action-btn" onclick="showToast('보고서 검색')">🔍</button>
+      <span class="title">목장 보고서</span>
+      <button class="action-btn" onclick="showToast('검색')">🔍</button>
     </div>
-    <div class="report-type-selector">
-      <div class="type-chip active">전체목장보고</div>
-      <div class="type-chip">제출 완료</div>
-      <div class="type-chip">작성중</div>
-    </div>
+
     <div class="scroll-area">
-      <div class="report-list-item" onclick="navigate('report-write')">
-        <div class="report-date-badge">
-          <div class="month">5월</div>
-          <div class="day">31</div>
-        </div>
-        <div class="report-info">
-          <div class="report-title">젊은이 제12목장 정기 보고</div>
-          <div class="report-meta">미제출 • 목자 김지구</div>
-        </div>
-        <div class="report-status draft">작성중</div>
+      <div class="report-type-selector">
+        <div class="type-chip active" onclick="filterReport(this)">장년목장</div>
+        <div class="type-chip" onclick="filterReport(this)">교육목장</div>
+        <div class="type-chip" onclick="filterReport(this)">대학목장</div>
+        <div class="type-chip" onclick="filterReport(this)">청년1목장</div>
+        <div class="type-chip" onclick="filterReport(this)">청년2목장</div>
       </div>
-      <div class="report-list-item" onclick="showToast('이미 제출된 보고서입니다.')">
-        <div class="report-date-badge" style="background:var(--surface-3);">
-          <div class="month" style="color:var(--text-3);">5월</div>
-          <div class="day" style="color:var(--text-3);">24</div>
-        </div>
+
+      <div style="padding: 12px 20px 4px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:13px; color:var(--text-3);">아름다운C 목장 · 총 8건</span>
+        <span style="font-size:12px; color:var(--primary); font-weight:600; cursor:pointer;" onclick="showToast('목장원 현황 리스트')">목장원 현황 ›</span>
+      </div>
+
+      <div class="report-list-item" onclick="navigate('report-view')">
+        <div class="report-date-badge"><div class="month">5월</div><div class="day">18</div></div>
         <div class="report-info">
-          <div class="report-title">젊은이 제12목장 정기 보고</div>
-          <div class="report-meta">제출완료: 05.24 19:30 • 목자 김지구</div>
+          <div class="report-title">2026년 5월 3주차 목장모임</div>
+          <div class="report-meta">출석 6명 · 결석 1명 · 기도제목 7건</div>
         </div>
-        <div class="report-status submitted">제출됨</div>
+        <div class="report-status submitted">제출</div>
+      </div>
+      <div class="report-list-item" onclick="navigate('report-view')">
+        <div class="report-date-badge"><div class="month">5월</div><div class="day">11</div></div>
+        <div class="report-info">
+          <div class="report-title">2026년 5월 2주차 목장모임</div>
+          <div class="report-meta">출석 7명 · 기도제목 7건</div>
+        </div>
+        <div class="report-status submitted">제출</div>
+      </div>
+      <div class="report-list-item" onclick="navigate('report-view')">
+        <div class="report-date-badge"><div class="month">5월</div><div class="day">4</div></div>
+        <div class="report-info">
+          <div class="report-title">2026년 5월 1주차 목장모임</div>
+          <div class="report-meta">출석 5명 · 결석 2명 · 기도제목 7건</div>
+        </div>
+        <div class="report-status submitted">제출</div>
+      </div>
+      <div class="report-list-item" onclick="navigate('report-view')">
+        <div class="report-date-badge"><div class="month">4월</div><div class="day">27</div></div>
+        <div class="report-info">
+          <div class="report-title">2026년 4월 4주차 목장모임</div>
+          <div class="report-meta">임시저장</div>
+        </div>
+        <div class="report-status draft">임시</div>
+      </div>
+      <div class="report-list-item" onclick="navigate('report-view')">
+        <div class="report-date-badge"><div class="month">4월</div><div class="day">20</div></div>
+        <div class="report-info">
+          <div class="report-title">2026년 4월 3주차 목장모임</div>
+          <div class="report-meta">출석 6명 · 기도제목 7건</div>
+        </div>
+        <div class="report-status submitted">제출</div>
       </div>
     </div>
-    <div class="fab" onclick="navigate('report-write')">＋</div>
+
+    <!-- FAB -->
+    <div class="fab" onclick="navigate('report-write')">✏️</div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="navigate('home')"><span class="nav-icon">🏠</span><span class="nav-label">홈</span></div>
+      <div class="nav-item" onclick="navigate('sermon')"><span class="nav-icon">🎙️</span><span class="nav-label">설교</span></div>
+      <div class="nav-item" onclick="navigate('prayer')"><span class="nav-icon">📋</span><span class="nav-label">소식</span></div>
+      <div class="nav-item" onclick="navigate('my')"><span class="nav-icon">👤</span><span class="nav-label">MY</span></div>
+      <div class="nav-item" onclick="showToast('교회 홈페이지')"><span class="nav-icon">⛪</span><span class="nav-label">교회</span></div>
+    </div>
   </div>
 
+  <!-- ========== REPORT WRITE SCREEN ========== -->
   <div class="screen" id="report-write">
     <div class="app-header">
       <button class="back-btn" onclick="navigate('report')">✕</button>
-      <div class="title">목장보고서 작성</div>
-      <div style="width:36px;"></div>
+      <span class="title">목장보고서 작성</span>
+      <button class="action-btn" onclick="showToast('임시저장 완료')">💾</button>
     </div>
-    <div class="write-meta">
-      <div class="report-week">5월 4주차 (05.31)</div>
-      <span class="report-type-badge">젊은이 지구</span>
-    </div>
+
     <div class="scroll-area">
+      <div class="write-meta">
+        <span class="report-week">2026년 5월 4주차</span>
+        <span class="report-type-badge">장년목장</span>
+      </div>
+
+      <!-- Attendance -->
       <div class="attendance-section">
-        <div class="attendance-title">목원 출석 체크 (총 4명)</div>
+        <div class="attendance-title">📌 출석 체크</div>
+
         <div class="member-row">
-          <div class="member-avatar">👑</div>
-          <div class="member-name">김지구 <span class="member-role">(목자)</span></div>
+          <div class="member-avatar">😊</div>
+          <div style="flex:1;"><div class="member-name">김지구A</div><div class="member-role">목자</div></div>
           <div class="attendance-btns">
-            <button class="att-btn selected-o">출석</button>
-            <button class="att-btn">결석</button>
+            <button class="att-btn selected-o" onclick="toggleAtt(this,'o')">출석</button>
+            <button class="att-btn" onclick="toggleAtt(this,'x')">결석</button>
           </div>
         </div>
         <div class="member-row">
-          <div class="member-avatar">👤</div>
-          <div class="member-name">이은혜 <span class="member-role">(목원)</span></div>
+          <div class="member-avatar">😀</div>
+          <div style="flex:1;"><div class="member-name">이소망</div><div class="member-role">목원</div></div>
           <div class="attendance-btns">
-            <button class="att-btn selected-o">출석</button>
-            <button class="att-btn">결석</button>
+            <button class="att-btn" onclick="toggleAtt(this,'o')">출석</button>
+            <button class="att-btn selected-x" onclick="toggleAtt(this,'x')">결석</button>
           </div>
         </div>
         <div class="member-row">
-          <div class="member-avatar">👤</div>
-          <div class="member-name">박소망 <span class="member-role">(목원)</span></div>
+          <div class="member-avatar">🙂</div>
+          <div style="flex:1;"><div class="member-name">박사랑</div><div class="member-role">목원</div></div>
           <div class="attendance-btns">
-            <button class="att-btn">출석</button>
-            <button class="att-btn selected-x">결석</button>
+            <button class="att-btn selected-o" onclick="toggleAtt(this,'o')">출석</button>
+            <button class="att-btn" onclick="toggleAtt(this,'x')">결석</button>
           </div>
         </div>
         <div class="member-row">
-          <div class="member-avatar">👤</div>
-          <div class="member-name">최사랑 <span class="member-role">(목원)</span></div>
+          <div class="member-avatar">😄</div>
+          <div style="flex:1;"><div class="member-name">최온유</div><div class="member-role">목원</div></div>
           <div class="attendance-btns">
-            <button class="att-btn selected-o">출석</button>
-            <button class="att-btn">결석</button>
+            <button class="att-btn selected-o" onclick="toggleAtt(this,'o')">출석</button>
+            <button class="att-btn" onclick="toggleAtt(this,'x')">결석</button>
+          </div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar">😁</div>
+          <div style="flex:1;"><div class="member-name">정믿음</div><div class="member-role">목원</div></div>
+          <div class="attendance-btns">
+            <button class="att-btn selected-o" onclick="toggleAtt(this,'o')">출석</button>
+            <button class="att-btn" onclick="toggleAtt(this,'x')">결석</button>
           </div>
         </div>
       </div>
 
+      <!-- Prayer -->
       <div class="prayer-section">
-        <div class="prayer-title">목장 기도제목 및 나눔 요약</div>
+        <div class="prayer-title">🙏 기도 제목</div>
         <div class="prayer-member">
-          <div class="prayer-member-name">이은혜 자매</div>
-          <textarea class="prayer-input" placeholder="이번 주 나눔과 기도제목을 입력하세요...">이직 준비 과정 가운데 평안을 주시기를 원하고, 주님의 인도하심을 신뢰하도록 기도를 요청함.</textarea>
+          <div class="prayer-member-name">김지구A</div>
+          <textarea class="prayer-input" placeholder="기도제목을 입력하세요...">새로 시작한 사업장 위에 하나님의 지혜가 함께하여 정직하고 성실한 일터로 세워지게 하소서.</textarea>
         </div>
         <div class="prayer-member">
-          <div class="prayer-member-name">최사랑 형제</div>
-          <textarea class="prayer-input" placeholder="이번 주 나눔과 기도제목을 입력하세요...">중간고사 기간 학업의 지혜를 주시고 건강을 지켜주셔서 끝까지 최선을 다할 수 있도록.</textarea>
+          <div class="prayer-member-name">이소망</div>
+          <textarea class="prayer-input" placeholder="기도제목을 입력하세요...">오랜 시간 예배의 자리를 비우고 있지만, 하나님을 향한 갈망이 다시금 회복되게 하소서.</textarea>
+        </div>
+        <div class="prayer-member">
+          <div class="prayer-member-name">박사랑</div>
+          <textarea class="prayer-input" placeholder="기도제목을 입력하세요..."></textarea>
+        </div>
+      </div>
+
+      <!-- Special notes -->
+      <div style="padding: 0 20px 16px;">
+        <div style="font-size:14px; font-weight:700; color:var(--text-1); margin-bottom:10px;">📝 특이사항</div>
+        <textarea class="prayer-input" style="min-height:60px;" placeholder="이번 모임 특이사항을 입력하세요..."></textarea>
+      </div>
+    </div>
+
+    <div class="submit-bar">
+      <button class="submit-btn" onclick="submitReport()">보고서 제출하기</button>
+    </div>
+  </div>
+
+  <!-- ========== REPORT VIEW SCREEN ========== -->
+  <div class="screen" id="report-view">
+    <div class="app-header">
+      <button class="back-btn" onclick="navigate('report')">←</button>
+      <span class="title">목장보고서 조회</span>
+      <button class="action-btn" onclick="showToast('피드백 작성')">💬</button>
+    </div>
+    <div class="scroll-area">
+      <div class="write-meta">
+        <span class="report-week">2026년 5월 3주차</span>
+        <span class="report-type-badge" style="background:var(--success-bg); color:var(--success);">제출완료</span>
+      </div>
+      <div style="padding:16px 20px; border-bottom:1px solid var(--border);">
+        <div style="font-size:13px; color:var(--text-3); margin-bottom:6px;">아름다운C 목장 · 2026.05.18</div>
+        <div style="display:flex; gap:12px;">
+          <div style="background:var(--success-bg); border-radius:var(--radius-m); padding:10px 16px; text-align:center;">
+            <div style="font-size:22px; font-weight:700; color:var(--success);">6</div>
+            <div style="font-size:11px; color:var(--text-3);">출석</div>
+          </div>
+          <div style="background:var(--error-bg); border-radius:var(--radius-m); padding:10px 16px; text-align:center;">
+            <div style="font-size:22px; font-weight:700; color:var(--error);">1</div>
+            <div style="font-size:11px; color:var(--text-3);">결석</div>
+          </div>
+          <div style="background:var(--primary-pale); border-radius:var(--radius-m); padding:10px 16px; text-align:center; flex:1;">
+            <div style="font-size:22px; font-weight:700; color:var(--primary);">7</div>
+            <div style="font-size:11px; color:var(--text-3);">기도제목</div>
+          </div>
+        </div>
+      </div>
+      <div class="prayer-section" style="border-bottom:1px solid var(--border);">
+        <div class="prayer-title">출석 현황</div>
+        <div class="member-row">
+          <div class="member-avatar">😊</div>
+          <div style="flex:1;"><div class="member-name">김지구A</div></div>
+          <span style="color:var(--success); font-weight:600; font-size:13px;">출석 ✓</span>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar">😀</div>
+          <div style="flex:1;"><div class="member-name">이소망</div></div>
+          <span style="color:var(--error); font-weight:600; font-size:13px;">결석</span>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar">🙂</div>
+          <div style="flex:1;"><div class="member-name">박사랑</div></div>
+          <span style="color:var(--success); font-weight:600; font-size:13px;">출석 ✓</span>
+        </div>
+      </div>
+      <div class="prayer-section">
+        <div class="prayer-title">기도 제목</div>
+        <div class="prayer-member">
+          <div class="prayer-member-name">김지구A</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6; background:var(--surface-2); border-radius:var(--radius-m); padding:10px 12px;">새로 시작한 사업장 위에 하나님의 지혜가 함께하여 정직하고 성실한 일터로 세워지게 하소서.</div>
+        </div>
+        <div class="prayer-member">
+          <div class="prayer-member-name">박사랑</div>
+          <div style="font-size:13px; color:var(--text-2); line-height:1.6; background:var(--surface-2); border-radius:var(--radius-m); padding:10px 12px;">교회 내 여러 봉사의 자리에서 기쁨으로 섬길 때 지치지 않는 영적 새 힘을 더하소서.</div>
+        </div>
+      </div>
+      <div style="height:16px;"></div>
+    </div>
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="navigate('home')"><span class="nav-icon">🏠</span><span class="nav-label">홈</span></div>
+      <div class="nav-item" onclick="navigate('sermon')"><span class="nav-icon">🎙️</span><span class="nav-label">설교</span></div>
+      <div class="nav-item" onclick="navigate('prayer')"><span class="nav-icon">📋</span><span class="nav-label">소식</span></div>
+      <div class="nav-item" onclick="navigate('my')"><span class="nav-icon">👤</span><span class="nav-label">MY</span></div>
+      <div class="nav-item" onclick="showToast('교회 홈페이지')"><span class="nav-icon">⛪</span><span class="nav-label">교회</span></div>
+    </div>
+  </div>
+
+  <!-- ========== ROOM BOOKING SCREEN ========== -->
+  <div class="screen" id="room">
+    <div class="app-header">
+      <button class="back-btn" onclick="navigate('home')">←</button>
+      <span class="title">공간 예약</span>
+      <button class="action-btn" onclick="showToast('내 예약 내역')">📋</button>
+    </div>
+
+    <div class="scroll-area">
+      <!-- Calendar -->
+      <div class="room-calendar">
+        <div class="cal-header">
+          <button class="cal-nav">‹</button>
+          <span class="cal-month">2026년 5월</span>
+          <button class="cal-nav">›</button>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-day-label">일</div><div class="cal-day-label">월</div><div class="cal-day-label">화</div><div class="cal-day-label">수</div><div class="cal-day-label">목</div><div class="cal-day-label">금</div><div class="cal-day-label">토</div>
+          <div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div>
+          <div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day has-booking">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div>
+          <div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day has-booking">13</div><div class="cal-day">14</div><div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div>
+          <div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div>
+          <div class="cal-day today" onclick="selectDay(this)">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day">31</div>
+        </div>
+      </div>
+
+      <!-- Branch selector -->
+      <div style="display:flex; gap:8px; padding:0 20px 12px;">
+        <button style="flex:1; padding:9px; border-radius:var(--radius-m); border:none; background:var(--primary); color:white; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer;" onclick="showToast('분당채플 선택')">분당채플</button>
+        <button style="flex:1; padding:9px; border-radius:var(--radius-m); border:1.5px solid var(--border); background:none; color:var(--text-2); font-size:13px; font-weight:500; font-family:inherit; cursor:pointer;" onclick="showToast('수지채플 선택')">수지채플</button>
+      </div>
+
+      <div class="section-title" style="padding: 0 20px 10px; margin:0; font-size:14px; font-weight:700; color:var(--text-1); display:flex; align-items:center; gap:6px;">
+        <span style="width:3px;height:14px;background:var(--primary);border-radius:2px;display:inline-block;"></span>
+        5월 25일 (일) 셀룸 현황
+      </div>
+
+      <div class="room-list">
+        <div class="room-card available" onclick="navigate('room-book')">
+          <div class="room-card-header">
+            <span class="room-name">셀룸 A-101</span>
+            <span class="room-avail y">예약가능</span>
+          </div>
+          <div class="room-detail">
+            <span>10명 수용</span>
+            <span>마이크 구비</span>
+            <span>피아노 있음</span>
+          </div>
+        </div>
+        <div class="room-card">
+          <div class="room-card-header">
+            <span class="room-name">셀룸 A-102</span>
+            <span class="room-avail n">예약완료</span>
+          </div>
+          <div class="room-detail">
+            <span>8명 수용</span>
+            <span>마이크 구비</span>
+          </div>
+        </div>
+        <div class="room-card available" onclick="navigate('room-book')">
+          <div class="room-card-header">
+            <span class="room-name">셀룸 B-201</span>
+            <span class="room-avail y">예약가능</span>
+          </div>
+          <div class="room-detail">
+            <span>15명 수용</span>
+            <span>빔프로젝터</span>
+            <span>마이크 구비</span>
+          </div>
+        </div>
+        <div class="room-card available" onclick="navigate('room-book')">
+          <div class="room-card-header">
+            <span class="room-name">셀룸 B-202</span>
+            <span class="room-avail y">예약가능</span>
+          </div>
+          <div class="room-detail">
+            <span>6명 수용</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="navigate('home')"><span class="nav-icon">🏠</span><span class="nav-label">홈</span></div>
+      <div class="nav-item" onclick="navigate('sermon')"><span class="nav-icon">🎙️</span><span class="nav-label">설교</span></div>
+      <div class="nav-item" onclick="navigate('prayer')"><span class="nav-icon">📋</span><span class="nav-label">소식</span></div>
+      <div class="nav-item" onclick="navigate('my')"><span class="nav-icon">👤</span><span class="nav-label">MY</span></div>
+      <div class="nav-item" onclick="showToast('교회 홈페이지')"><span class="nav-icon">⛪</span><span class="nav-label">교회</span></div>
+    </div>
+  </div>
+
+  <!-- ========== ROOM BOOK SCREEN ========== -->
+  <div class="screen" id="room-book">
+    <div class="app-header">
+      <button class="back-btn" onclick="navigate('room')">←</button>
+      <span class="title">셀룸 예약</span>
+      <button class="action-btn" style="opacity:0; pointer-events:none;">·</button>
+    </div>
+    <div class="scroll-area">
+      <div style="padding:16px 20px; background:var(--surface-2); border-bottom:1px solid var(--border);">
+        <div style="font-size:18px; font-weight:700; color:var(--text-1);">셀룸 A-101</div>
+        <div style="font-size:13px; color:var(--text-3); margin-top:4px;">분당채플 · 10명 수용 · 마이크/피아노</div>
+        <div style="display:flex; align-items:center; gap:8px; margin-top:8px;">
+          <span style="background:var(--success-bg); color:var(--success); font-size:12px; font-weight:600; padding:4px 10px; border-radius:20px;">예약가능</span>
+          <span style="font-size:12px; color:var(--text-3);">2026.05.25 (일)</span>
+        </div>
+      </div>
+
+      <div class="time-slots" style="padding-top:16px;">
+        <div class="time-slots-title">시간 선택 (최대 2시간)</div>
+        <div class="slot-grid">
+          <div class="slot-btn occupied">09:00~10:00</div>
+          <div class="slot-btn occupied">10:00~11:00</div>
+          <div class="slot-btn" onclick="toggleSlot(this)">11:00~12:00</div>
+          <div class="slot-btn selected" onclick="toggleSlot(this)">13:00~14:00</div>
+          <div class="slot-btn selected" onclick="toggleSlot(this)">14:00~15:00</div>
+          <div class="slot-btn" onclick="toggleSlot(this)">15:00~16:00</div>
+          <div class="slot-btn" onclick="toggleSlot(this)">16:00~17:00</div>
+          <div class="slot-btn occupied">17:00~18:00</div>
+          <div class="slot-btn" onclick="toggleSlot(this)">19:00~20:00</div>
+        </div>
+      </div>
+
+      <div style="padding:16px 20px;">
+        <div style="font-size:14px; font-weight:700; color:var(--text-1); margin-bottom:10px;">예약자 정보</div>
+        <div style="background:var(--surface-2); border-radius:var(--radius-m); padding:14px;">
+          <div class="info-row" style="padding:6px 0;"><span class="info-key">이름</span><span class="info-val">김지구A</span></div>
+          <div class="info-row" style="padding:6px 0; border-bottom:none;"><span class="info-key">연락처</span><span class="info-val">010-3333-4444</span></div>
+        </div>
+        <div style="background:var(--accent-light); border-radius:var(--radius-m); padding:12px; margin-top:12px; font-size:12px; color:var(--text-2); line-height:1.6;">
+          ⚠️ 예약 시간 5분 전 체크인이 필요합니다. 미체크인 시 자동으로 예약이 취소됩니다.
         </div>
       </div>
     </div>
     <div class="submit-bar">
-      <button class="submit-btn" onclick="submitReport()">목장보고서 온라인 제출</button>
+      <button class="submit-btn" onclick="bookRoom()">예약 확정 (13:00~15:00)</button>
     </div>
   </div>
 
-  <div class="screen" id="room">
+  <!-- ========== SERMON SCREEN ========== -->
+  <div class="screen" id="sermon">
     <div class="app-header">
       <button class="back-btn" onclick="navigate('home')">←</button>
-      <div class="title">공간 예약 및 신청</div>
-      <button class="action-btn" onclick="showToast('예약 내역')">📋</button>
+      <span class="title">설교</span>
+      <button class="action-btn" onclick="showToast('검색')">🔍</button>
     </div>
-    <div class="room-calendar">
-      <div class="cal-header">
-        <div class="cal-month">2026년 5월</div>
-        <div style="display:flex;gap:6px;">
-          <button class="cal-nav">◀</button>
-          <button class="cal-nav">▶</button>
-        </div>
-      </div>
-      <div class="cal-grid">
-        <div class="cal-day-label" style="color:#E03B3B;">일</div><div class="cal-day-label">월</div><div class="cal-day-label">화</div><div class="cal-day-label">수</div><div class="cal-day-label">목</div><div class="cal-day-label">금</div><div class="cal-day-label" style="color:var(--primary-light);">토</div>
-        <div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day">1</div><div class="cal-day" style="color:var(--primary-light);">2</div>
-        <div class="cal-day" style="color:#E03B3B;">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day" style="color:var(--primary-light);">9</div>
-        <div class="cal-day" style="color:#E03B3B;">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day" style="color:var(--primary-light);">30</div>
-        <div class="cal-day today selected" id="cal-today">31</div>
-      </div>
-    </div>
-    <div class="section" style="padding-top:0;"><div class="section-title">예약 가능 공간 목록</div></div>
-    <div class="scroll-area">
-      <div class="room-list">
-        <div class="room-card available" onclick="selectRoom('비전관 301호 (중예배실)', '정원 50명 • 음향/프로젝터 완비')">
-          <div class="room-card-header">
-            <div class="room-name">비전관 301호 (중예배실)</div>
-            <span class="room-avail y">예약가능</span>
-          </div>
-          <div class="room-detail">
-            <span>수용인원: 50명</span>
-            <span>시설: 마이크, 빔프로젝터, 피아노</span>
-          </div>
-        </div>
-        <div class="room-card available" onclick="selectRoom('사역동 2층 목장모임실B', '정원 12명 • 화이트보드 구비')">
-          <div class="room-card-header">
-            <div class="room-name">사역동 2층 목장모임실 B</div>
-            <span class="room-avail y">예약가능</span>
-          </div>
-          <div class="room-detail">
-            <span>수용인원: 12명</span>
-            <span>시설: 화이트보드, 냉난방기</span>
-          </div>
-        </div>
-        <div class="room-card booked" onclick="showToast('이미 다른 팀의 예약이 완료된 공간입니다.')">
-          <div class="room-card-header">
-            <div class="room-name">그레이스홀 (본당 대예배실)</div>
-            <span class="room-avail n" style="background:var(--error-bg);color:var(--error)">예약완료</span>
-          </div>
-          <div class="room-detail">
-            <span>수용인원: 500명 이상</span>
-            <span>주일 메인 대예배 전용 공간</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="screen" id="my">
-    <div class="app-header">
-      <div style="width:36px;"></div>
-      <div class="title">나의 교적 정보</div>
-      <button class="action-btn" onclick="showToast('교적 수정 신청')">⚙️</button>
-    </div>
-    <div class="my-header">
-      <div class="profile-card">
-        <div class="profile-avatar">⛪</div>
-        <div>
-          <div class="profile-name">김지구A <span style="font-size:14px;font-weight:400;opacity:0.9;">집사</span></div>
-          <div class="profile-sub">소속: 젊은이지구 목장사역부</div>
-          <span class="profile-badge">목자 마스터</span>
-        </div>
-        <div class="qr-btn" onclick="openQrModal()">
-          <span class="qr-icon">🔲</span>
-          모바일 QR패스
-        </div>
-      </div>
-    </div>
-    <div class="info-tabs">
-      <div class="info-tab active" onclick="changeMyTab(0)">기본교적</div>
-      <div class="info-tab" onclick="changeMyTab(1)">헌금/기부금</div>
-      <div class="info-tab" onclick="changeMyTab(2)">훈련/교육</div>
-    </div>
     <div class="scroll-area">
-      <div class="tab-content active" id="my-tab-0">
-        <div class="info-section">
-          <div class="info-section-title">소속 및 직분 정보</div>
-          <div class="info-row"><span class="info-key">성도번호</span><span class="info-val">2026-100488</span></div>
-          <div class="info-row"><span class="info-key">등록일자</span><span class="info-val">2018년 03월 11일</span></div>
-          <div class="info-row"><span class="info-key">대교구/교구</span><span class="info-val">젊은이교구 / 청년3부</span></div>
-          <div class="info-row"><span class="info-key">소속 목장</span><span class="info-val">젊은이 제12목장 (소속)</span></div>
-        </div>
-        <div class="info-section" style="padding-top:0;">
-          <div class="info-section-title">개인 기본 인적 사항</div>
-          <div class="info-row"><span class="info-key">생년월일</span><span class="info-val">1994년 08월 15일 (양력)</span></div>
-          <div class="info-row"><span class="info-key">휴대전화</span><span class="info-val">010-1234-5678</span></div>
-          <div class="info-row"><span class="info-key">이메일 주소</span><span class="info-val">jiguchon@church.or.kr</span></div>
-          <div class="info-row"><span class="info-key">등록 주소지</span><span class="info-val" style="font-size:12px;">경기도 용인시 수지구 수지로 488 지구빌딩</span></div>
-        </div>
+      <div class="sermon-tabs">
+        <div class="sermon-tab active" onclick="switchSermonTab(this)">담임목사 설교</div>
+        <div class="sermon-tab" onclick="switchSermonTab(this)">원로목사 설교</div>
+        <div class="sermon-tab" onclick="switchSermonTab(this)">주중설교</div>
       </div>
-      <div class="tab-content" id="my-tab-1">
-        <div class="info-section">
-          <div class="donation-summary">
-            <div class="donation-year">2026년도 실시간 누적 납부액</div>
-            <div class="donation-amount">₩2,450,000</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.7)">국세청 연말정산 간소화 서비스 자동 연동 대상</div>
-          </div>
-          <div class="info-section-title">최근 연도별 기부금 영수증</div>
-          <div class="info-row" onclick="showToast('2025 영수증 다운로드')"><span class="info-key">2025년도 종합 합산</span><span class="info-val" style="color:var(--primary);font-weight:600;">발급완료 💾</span></div>
-          <div class="info-row" onclick="showToast('2024 영수증 다운로드')"><span class="info-key">2024년도 종합 합산</span><span class="info-val" style="color:var(--primary);font-weight:600;">발급완료 💾</span></div>
-        </div>
-      </div>
-      <div class="tab-content" id="my-tab-2">
-        <div class="edu-item" onclick="showToast('수료증 상세 보기')">
-          <span class="edu-status done">수료완료</span>
-          <div class="edu-info">
-            <div class="edu-name">지구촌 성장반 과정 (12주 과정)</div>
-            <div class="edu-date">수료일: 2024.11.20 • 인도자: 박장로</div>
-          </div>
-          <span class="edu-arrow">›</span>
-        </div>
-        <div class="edu-item" onclick="showToast('현재 교육 이수중입니다.')">
-          <span class="edu-status ing">이수중</span>
-          <div class="edu-info">
-            <div class="edu-name">[제26-2기] 목자 필수 리더십 세미나</div>
-            <div class="edu-date">진행률: 4 / 6 주차 과정 이수 중</div>
-          </div>
-          <span class="edu-arrow">›</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="screen" id="sermons">
-    <div class="app-header">
-      <button class="back-btn" onclick="navigate('home')">←</button>
-      <div class="title">지구촌 미디어 미니설교</div>
-      <div style="width:36px;"></div>
-    </div>
-    <div class="sermon-tabs">
-      <div class="sermon-tab active">주일대예배</div>
-      <div class="sermon-tab">수요기도회</div>
-      <div class="sermon-tab">젊은이예배</div>
-      <div class="sermon-tab">새벽큐티방송</div>
-    </div>
-    <div class="scroll-area">
-      <div class="sermon-card" onclick="showToast('설교 비디오 플레이어 재생')">
-        <div class="sermon-thumb">✨</div>
+      <div class="sermon-card" onclick="showToast('설교 영상을 재생합니다')">
+        <div class="sermon-thumb">🎙️</div>
         <div class="sermon-info">
-          <div class="sermon-title">오직 믿음과 오직 은혜의 파도 위에 서라</div>
-          <div class="sermon-preacher">담임목사 강설교 • 로마서 5:1~5</div>
-          <div class="sermon-date">주일 3부 대예배 • 2026.05.24</div>
+          <div class="sermon-title">천지 창조의 섭리 — 하나님의 첫 번째 선물</div>
+          <div class="sermon-preacher">담임목사</div>
+          <div class="sermon-date">2026.05.25</div>
         </div>
       </div>
-      <div class="sermon-card" onclick="showToast('설교 비디오 플레이어 재생')">
-        <div class="sermon-thumb">🙏</div>
+      <div class="sermon-card" onclick="showToast('설교 영상을 재생합니다')">
+        <div class="sermon-thumb">🎙️</div>
         <div class="sermon-info">
-          <div class="sermon-title">환난 중에도 크게 기뻐할 수 있는 하늘의 소망</div>
-          <div class="sermon-preacher">담임목사 강설교 • 베드로전서 1:3~9</div>
-          <div class="sermon-date">주일 3부 대예배 • 2026.05.17</div>
+          <div class="sermon-title">믿음으로 사는 삶 — 로마서 강해 12</div>
+          <div class="sermon-preacher">담임목사</div>
+          <div class="sermon-date">2026.05.18</div>
         </div>
       </div>
+      <div class="sermon-card" onclick="showToast('설교 영상을 재생합니다')">
+        <div class="sermon-thumb">🎙️</div>
+        <div class="sermon-info">
+          <div class="sermon-title">성령의 열매 — 사랑, 희락, 화평</div>
+          <div class="sermon-preacher">담임목사</div>
+          <div class="sermon-date">2026.05.11</div>
+        </div>
+      </div>
+      <div class="sermon-card" onclick="showToast('설교 영상을 재생합니다')">
+        <div class="sermon-thumb">🎙️</div>
+        <div class="sermon-info">
+          <div class="sermon-title">기도의 능력 — 응답받는 기도</div>
+          <div class="sermon-preacher">담임목사</div>
+          <div class="sermon-date">2026.05.04</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="navigate('home')"><span class="nav-icon">🏠</span><span class="nav-label">홈</span></div>
+      <div class="nav-item active" onclick="navigate('sermon')"><span class="nav-icon">🎙️</span><span class="nav-label">설교</span></div>
+      <div class="nav-item" onclick="navigate('prayer')"><span class="nav-icon">📋</span><span class="nav-label">소식</span></div>
+      <div class="nav-item" onclick="navigate('my')"><span class="nav-icon">👤</span><span class="nav-label">MY</span></div>
+      <div class="nav-item" onclick="showToast('교회 홈페이지')"><span class="nav-icon">⛪</span><span class="nav-label">교회</span></div>
     </div>
   </div>
 
-  <div class="screen" id="prayer-list">
+  <!-- ========== PRAYER / NEWS SCREEN ========== -->
+  <div class="screen" id="prayer">
     <div class="app-header">
       <button class="back-btn" onclick="navigate('home')">←</button>
-      <div class="title">목장 공동체 기도제목</div>
-      <div style="width:36px;"></div>
+      <span class="title">소식</span>
+      <button class="action-btn" onclick="showToast('검색')">🔍</button>
     </div>
-    <div style="background:var(--surface-2);padding:14px 20px;font-size:13px;color:var(--text-2);border-bottom:1px solid var(--border);">
-       젊은이 제12목장의 실시간 중보기도판입니다.
-    </div>
-    <div class="scroll-area" style="padding-top:16px;" id="prayer-board-container">
+
+    <div class="scroll-area">
+      <div style="display:flex; gap:8px; padding:14px 20px 10px; border-bottom:1px solid var(--border);">
+        <button style="flex:1; padding:9px; border-radius:20px; background:var(--primary); color:white; border:none; font-size:13px; font-weight:600; font-family:inherit; cursor:pointer;">목장 기도제목</button>
+        <button style="flex:1; padding:9px; border-radius:20px; background:none; border:1.5px solid var(--border); color:var(--text-2); font-size:13px; font-weight:500; font-family:inherit; cursor:pointer;" onclick="showToast('교회 소식')">교회 소식</button>
+      </div>
+
+      <button class="share-btn" style="margin: 12px 20px 4px;" onclick="showToast('카카오톡으로 공유합니다')">
+        💬 전체 기도제목 카카오톡 공유
+      </button>
+
       <div class="prayer-card">
         <div class="prayer-card-header">
           <div class="prayer-member-info">
-            <div class="prayer-group">제12목장 목원</div>
-            <div class="prayer-person">이은혜 자매</div>
+            <div class="prayer-group">분당 12지구 샬롬목장 · 2026.05.06</div>
+            <div class="prayer-person">이길호</div>
           </div>
-          <div class="prayer-date">2026.05.31 작성</div>
         </div>
         <ul class="prayer-items">
-          <li>이직 준비 과정 가운데 평안을 주시기를 원하고, 주님의 인도하심을 신뢰하도록 기도를 요청함.</li>
+          <li>새로 시작한 사업장 위에 하나님의 지혜가 함께하여 정직하고 성실한 일터로 세워지게 하소서.</li>
+          <li>믿지 않는 가족들이 주님의 사랑을 경험하여 온 가족이 함께 예배하는 복을 허락하소서.</li>
         </ul>
       </div>
       <div class="prayer-card">
         <div class="prayer-card-header">
           <div class="prayer-member-info">
-            <div class="prayer-group">제12목장 목원</div>
-            <div class="prayer-person">최사랑 형제</div>
+            <div class="prayer-group">분당 12지구 샬롬목장 · 2026.05.06</div>
+            <div class="prayer-person">김철수</div>
           </div>
-          <div class="prayer-date">2026.05.31 작성</div>
         </div>
         <ul class="prayer-items">
-          <li>중간고사 기간 학업의 지혜를 주시고 건강을 지켜주셔서 끝까지 최선을 다할 수 있도록.</li>
+          <li>최근 건강상의 어려움과 통증을 주님께서 어루만져 주시고 속히 회복되게 하소서.</li>
+          <li>치료 과정 중에 낙심하지 않는 굳건한 믿음을 주시고 마음의 평안을 지켜주소서.</li>
+          <li>간병하는 가족들에게도 새 힘을 주시어 사랑으로 서로를 보듬는 시간이 되게 하소서.</li>
         </ul>
       </div>
-      <button class="share-btn" onclick="showToast('카카오톡으로 공유 메시지가 발송됩니다')">💬 카카오톡으로 목장 기도제목 공유하기</button>
-    </div>
-  </div>
-
-  <div class="bottom-nav">
-    <div class="nav-item active" id="nav-home" onclick="navigate('home')">
-      <div class="nav-icon">🏠</div><div class="nav-label">홈</div>
-    </div>
-    <div class="nav-item" id="nav-report" onclick="navigate('report')">
-      <div class="nav-icon">📋</div><div class="nav-label">목장보고</div>
-    </div>
-    <div class="nav-item" id="nav-room" onclick="navigate('room')">
-      <div class="nav-icon">🔑</div><div class="nav-label">공간예약</div>
-    </div>
-    <div class="nav-item" id="nav-my" onclick="navigate('my')">
-      <div class="nav-icon">👤</div><div class="nav-label">교적정보</div>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="global-toast">알림 메시지</div>
-
-<div class="modal-overlay" id="qr-modal" onclick="closeQrModal()">
-  <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <div class="modal-title">스마트 교인 인증 패스</div>
-    <div class="modal-content">
-      <div class="qr-display">🔳</div>
-      <div class="qr-name">김지구A 집사 (교인인증)</div>
-      <div class="qr-sub">예배 출석 체크 및 공간 입장 패스포트</div>
-      <button class="modal-close-btn" onclick="closeQrModal()">닫기</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="time-modal" onclick="closeTimeModal()">
-  <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="time-modal-title">예약 시간 선택</div>
-    <div class="modal-content">
-      <p id="time-modal-sub" style="font-size:13px;color:var(--text-3);margin-bottom:14px;"></p>
-      <div class="time-slots-title">이용 시간 슬롯</div>
-      <div class="slot-grid">
-        <button class="slot-btn" onclick="toggleSlot(this)">10:00 - 12:00</button>
-        <button class="slot-btn occupied">13:00 - 15:00</button>
-        <button class="slot-btn" onclick="toggleSlot(this)">15:00 - 17:00</button>
-        <button class="slot-btn" onclick="toggleSlot(this)">17:00 - 19:00</button>
-        <button class="slot-btn occupied">19:00 - 21:00</button>
+      <div class="prayer-card">
+        <div class="prayer-card-header">
+          <div class="prayer-member-info">
+            <div class="prayer-group">분당 12지구 샬롬목장 · 2026.05.06</div>
+            <div class="prayer-person">이소망</div>
+          </div>
+        </div>
+        <ul class="prayer-items">
+          <li>오랜 시간 예배의 자리를 비우고 있지만, 하나님을 향한 갈망이 다시금 회복되게 하소서.</li>
+          <li>삶의 바쁜 환경과 제약들이 해결되어 조만간 기쁜 마음으로 공동체에 복귀하게 하소서.</li>
+        </ul>
       </div>
-      <button class="submit-btn" style="margin-top:20px;" onclick="confirmBooking()">예약 신청 완료하기</button>
+      <div class="prayer-card">
+        <div class="prayer-card-header">
+          <div class="prayer-member-info">
+            <div class="prayer-group">분당 12지구 샬롬목장 · 2026.05.06</div>
+            <div class="prayer-person">김사랑</div>
+          </div>
+        </div>
+        <ul class="prayer-items">
+          <li>교회 내 여러 봉사의 자리에서 기쁨으로 섬길 때 지치지 않는 영적 새 힘을 더하소서.</li>
+          <li>준비하고 있는 진로와 학업의 문이 하나님의 선하신 인도하심 안에서 열리게 하소서.</li>
+        </ul>
+      </div>
+      <div style="height:16px;"></div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="navigate('home')"><span class="nav-icon">🏠</span><span class="nav-label">홈</span></div>
+      <div class="nav-item" onclick="navigate('sermon')"><span class="nav-icon">🎙️</span><span class="nav-label">설교</span></div>
+      <div class="nav-item active" onclick="navigate('prayer')"><span class="nav-icon">📋</span><span class="nav-label">소식</span></div>
+      <div class="nav-item" onclick="navigate('my')"><span class="nav-icon">👤</span><span class="nav-label">MY</span></div>
+      <div class="nav-item" onclick="showToast('교회 홈페이지')"><span class="nav-icon">⛪</span><span class="nav-label">교회</span></div>
     </div>
   </div>
+
+  <!-- QR Modal -->
+  <div class="modal-overlay" id="qr-modal" onclick="hideQR()">
+    <div class="modal-sheet" onclick="event.stopPropagation()">
+      <div class="modal-handle"></div>
+      <div class="modal-title">교인 인증 QR</div>
+      <div class="modal-content">
+        <div class="qr-display">▣</div>
+        <div class="qr-name">김지구A</div>
+        <div class="qr-sub">수지 1지구 아름다운C 목장 · 서리집사</div>
+      </div>
+      <button class="modal-close-btn" onclick="hideQR()">닫기</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
 </div>
 
-<div id="pwa-install-prompt" style="display:none;position:fixed;bottom:calc(96px + env(safe-area-inset-bottom,0px));left:16px;right:16px;z-index:9999;background:#1B4B8A;color:white;padding:16px;border-radius:16px;box-shadow:var(--shadow-l);font-family:'Noto Sans KR',sans-serif;">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-    <div style="font-size:14px;font-weight:600;line-height:1.4;">지구촌교회 앱을 홈 화면에 추가하여 편리하게 이용해 보세요!</div>
-    <button onclick="document.getElementById('pwa-install-prompt').style.display='none'" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;opacity:0.7;line-height:1;">✕</button>
+<script>
+function navigate(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+  // Scroll to top
+  const sa = target?.querySelector('.scroll-area');
+  if (sa) sa.scrollTop = 0;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => { t.style.display = 'none'; }, 2000);
+}
+
+function switchInfoTab(idx, el) {
+  document.querySelectorAll('#my .info-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + idx)?.classList.add('active');
+}
+
+function filterReport(el) {
+  document.querySelectorAll('.type-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  showToast(el.textContent + ' 보고서');
+}
+
+function toggleAtt(btn, type) {
+  const row = btn.closest('.attendance-btns');
+  row.querySelectorAll('.att-btn').forEach(b => {
+    b.classList.remove('selected-o', 'selected-x');
+  });
+  btn.classList.add(type === 'o' ? 'selected-o' : 'selected-x');
+}
+
+function toggleSlot(btn) {
+  if (btn.classList.contains('occupied')) return;
+  btn.classList.toggle('selected');
+}
+
+function submitReport() {
+  showToast('✅ 목장보고서가 제출되었습니다');
+  setTimeout(() => navigate('report'), 1000);
+}
+
+function bookRoom() {
+  showToast('✅ 셀룸 A-101 예약이 완료되었습니다');
+  setTimeout(() => navigate('room'), 1200);
+}
+
+function selectDay(el) {
+  document.querySelectorAll('.cal-day').forEach(d => {
+    if (!d.classList.contains('today')) d.classList.remove('selected');
+  });
+  el.classList.add('selected');
+}
+
+function switchSermonTab(el) {
+  document.querySelectorAll('.sermon-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  showToast(el.textContent);
+}
+
+function showQR() { document.getElementById('qr-modal').classList.add('active'); }
+function hideQR() { document.getElementById('qr-modal').classList.remove('active'); }
+
+
+// ===== Service Worker (오프라인 캐시) =====
+if ('serviceWorker' in navigator) {
+  const swCode = `
+const CACHE = 'jiguchon-v1';
+self.addEventListener('install', e => { self.skipWaiting(); });
+self.addEventListener('activate', e => { self.clients.claim(); });
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(
+    caches.open(CACHE).then(cache =>
+      cache.match(e.request).then(cached => {
+        const fetched = fetch(e.request).then(resp => {
+          cache.put(e.request, resp.clone());
+          return resp;
+        }).catch(() => cached);
+        return cached || fetched;
+      })
+    )
+  );
+});
+  `;
+  try {
+    const blob = new Blob([swCode], {type: 'application/javascript'});
+    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+  } catch(e) {}
+}
+
+// ===== PWA 설치 배너 =====
+let _deferredPrompt = null;
+const _isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent.toLowerCase());
+const _isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+if (!_isStandalone) {
+  if (_isIOS) {
+    setTimeout(() => {
+      const g = document.getElementById('ios-guide');
+      if (g) g.style.display = 'block';
+    }, 2500);
+  }
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    _deferredPrompt = e;
+    setTimeout(() => {
+      const b = document.getElementById('pwa-banner');
+      if (b) b.style.display = 'block';
+    }, 2000);
+  });
+}
+
+document.addEventListener('click', async e => {
+  if (e.target.id === 'pwa-install-btn' && _deferredPrompt) {
+    _deferredPrompt.prompt();
+    const { outcome } = await _deferredPrompt.userChoice;
+    _deferredPrompt = null;
+    const b = document.getElementById('pwa-banner');
+    if (b) b.style.display = 'none';
+    if (outcome === 'accepted') showToast('✅ 홈 화면에 추가되었습니다!');
+  }
+});
+
+window.addEventListener('appinstalled', () => {
+  const b = document.getElementById('pwa-banner');
+  if (b) b.style.display = 'none';
+  showToast('✅ 앱 설치 완료!');
+});
+</script>
+
+<!-- ===== PWA 설치 배너 (Android) ===== -->
+<div id="pwa-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;width:100%;z-index:9999;background:#1B4B8A;color:white;padding:16px 16px calc(28px + env(safe-area-inset-bottom,0px));font-family:'Noto Sans KR',sans-serif;box-shadow:0 -4px 24px rgba(0,0,0,0.3);border-radius:20px 20px 0 0;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+    <div style="width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">⛪</div>
+    <div style="flex:1;">
+      <div style="font-size:15px;font-weight:700;">지구촌교회 앱 설치</div>
+      <div style="font-size:12px;opacity:.8;margin-top:2px;">홈 화면에 추가하여 앱처럼 사용하세요</div>
+    </div>
+    <button onclick="document.getElementById('pwa-banner').style.display='none'" style="background:none;border:none;color:white;font-size:22px;cursor:pointer;opacity:.7;padding:2px 6px;line-height:1;">✕</button>
   </div>
   <button id="pwa-install-btn" style="width:100%;padding:14px;border-radius:12px;background:white;color:#1B4B8A;border:none;font-size:15px;font-weight:700;font-family:'Noto Sans KR',sans-serif;cursor:pointer;">📲 홈 화면에 추가</button>
 </div>
 
+<!-- ===== PWA 설치 안내 (iOS Safari) ===== -->
 <div id="ios-guide" style="display:none;position:fixed;bottom:0;left:0;right:0;width:100%;z-index:9999;background:#1B4B8A;color:white;padding:16px 16px calc(28px + env(safe-area-inset-bottom,0px));font-family:'Noto Sans KR',sans-serif;box-shadow:0 -4px 24px rgba(0,0,0,0.3);border-radius:20px 20px 0 0;">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
     <div style="font-size:15px;font-weight:700;">📱 홈 화면에 앱 추가하기</div>
     <button onclick="document.getElementById('ios-guide').style.display='none'" style="background:none;border:none;color:white;font-size:22px;cursor:pointer;opacity:.7;">✕</button>
   </div>
-  <div style="font-size:13px;line-height:1.6;opacity:.95;margin-bottom:6px;">
-    아이폰(iOS) 사용자는 하단 툴바의 **[공유 버튼 📤]**을 누른 뒤, 스크롤을 내려 **[홈 화면에 추가]**를 선택하시면 실제 앱처럼 설치되어 주소창 없이 시원하게 쓰실 수 있습니다.
+  <div style="background:rgba(255,255,255,0.12);border-radius:12px;padding:14px;font-size:13px;line-height:2.1;">
+    <div>1️⃣ 하단 <strong style="background:rgba(255,255,255,0.2);padding:1px 6px;border-radius:4px;">공유</strong> 버튼 (□↑) 탭</div>
+    <div>2️⃣ <strong style="background:rgba(255,255,255,0.2);padding:1px 6px;border-radius:4px;">홈 화면에 추가</strong> 선택</div>
+    <div>3️⃣ 우측 상단 <strong style="background:rgba(255,255,255,0.2);padding:1px 6px;border-radius:4px;">추가</strong> 탭 → 완료!</div>
   </div>
 </div>
-
-<script>
-// --- 전역 네비게이션 시스템 ---
-function navigate(screenId) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  const target = document.getElementById(screenId);
-  if (target) {
-    target.classList.add('active');
-    target.querySelector('.scroll-area').scrollTop = 0;
-  }
-  
-  // 글로벌 하단 탭 강조 업데이트
-  document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-  let baseId = screenId.split('-')[0]; // ex) report-write -> report
-  const navItem = document.getElementById('nav-' + baseId);
-  if (navItem) navItem.classList.add('active');
-}
-
-// --- 글로벌 토스트 메세지 ---
-let toastTimeout;
-function showToast(msg) {
-  const toast = document.getElementById('global-toast');
-  toast.innerText = msg;
-  toast.style.display = 'block';
-  clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => { toast.style.display = 'none'; }, 2000);
-}
-
-// --- 모달 제어 함수 ---
-function openQrModal() { document.getElementById('qr-modal').classList.add('active'); }
-function closeQrModal() { document.getElementById('qr-modal').classList.remove('active'); }
-
-let selectedRoomName = "";
-function selectRoom(name, detail) {
-  selectedRoomName = name;
-  document.getElementById('time-modal-title').innerText = name;
-  document.getElementById('time-modal-sub').innerText = detail;
-  document.getElementById('time-modal').classList.add('active');
-}
-function closeTimeModal() { document.getElementById('time-modal').classList.remove('active'); }
-function toggleSlot(btn) { btn.classList.toggle('selected'); }
-function confirmBooking() {
-  closeTimeModal();
-  showToast(selectedRoomName + " 예약 신청이 완료되었습니다.");
-}
-
-function changeMyTab(idx) {
-  document.querySelectorAll('#my .info-tab').forEach((t, i) => {
-    t.classList.toggle('active', i === idx);
-  });
-  document.querySelectorAll('#my .tab-content').forEach((c, i) => {
-    c.classList.toggle('active', i === idx);
-  });
-}
-
-// --- 보고서 로직 ---
-function submitReport() {
-  const t1 = document.querySelectorAll('.prayer-input')[0].value;
-  const t2 = document.querySelectorAll('.prayer-input')[1].value;
-  
-  const container = document.getElementById('prayer-board-container');
-  // 앞부분에 삽입하기 위해 기존 노드 처리
-  const shareBtn = container.querySelector('.share-btn');
-  
-  const html = `
-    <div class="prayer-card" style="border-color:var(--success);">
-      <div class="prayer-card-header">
-        <div class="prayer-member-info">
-          <div class="prayer-group" style="color:var(--success);">제12목장 (방금전 전송됨)</div>
-          <div class="prayer-person">이은혜 자매</div>
-        </div>
-        <div class="prayer-date">2026.05.31</div>
-      </div>
-      <ul class="prayer-items"><li>${t1}</li></ul>
-    </div>
-    <div class="prayer-card" style="border-color:var(--success);">
-      <div class="prayer-card-header">
-        <div class="prayer-member-info">
-          <div class="prayer-group" style="color:var(--success);">제12목장 (방금전 전송됨)</div>
-          <div class="prayer-person">최사랑 형제</div>
-        </div>
-        <div class="prayer-date">2026.05.31</div>
-      </div>
-      <ul class="prayer-items"><li>${t2}</li></ul>
-    </div>
-  `;
-  
-  const div = document.createElement('div');
-  div.innerHTML = html;
-  container.insertBefore(div, shareBtn);
-  
-  navigate('prayer-list');
-  showToast('목장보고서 온라인 제출 및 중보기도반에 업로드 완료!');
-}
-
-// ==========================================
-// ===== PWA 인스톨 & 모바일 기기 감지 로직 =====
-// ==========================================
-let deferredPrompt;
-const installPromptBanner = document.getElementById('pwa-install-prompt');
-const installBtn = document.getElementById('pwa-install-btn');
-
-// 1. Android / PC 크롬 진입 시 브라우저 기본 설치 팝업을 가로채고 커스텀 배너 노출
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  // 단, 이미 스탠드얼론(앱 형태)으로 켜져있지 않은 경우에만 설치 배너 표시
-  if (!window.matchMedia('(display-mode: standalone)').matches) {
-    installPromptBanner.style.display = 'block';
-  }
-});
-
-// 2. 홈 화면에 추가 버튼 터치 액션 구현
-installBtn.addEventListener('click', async () => {
-  if (deferredPrompt) {
-    installPromptBanner.style.display = 'none';
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`사용자 설치 선택 결과: ${outcome}`);
-    deferredPrompt = null;
-  }
-});
-
-// 3. 앱이 설치 완료되면 배너 자동 폐쇄
-window.addEventListener('appinstalled', () => {
-  installPromptBanner.style.display = 'none';
-  showToast('🎉 홈 화면에 지구촌교회 앱이 성공적으로 설치되었습니다!');
-});
-
-// 4. iOS 아이폰 유저 대상 맞춤 안내 바 처리
-function checkIosGuide() {
-  const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-  
-  // 아이폰이면서 동시에 주소창이 살아있는 브라우저 상태인 경우 하단 가이드 노출
-  if (isIos && !isStandalone) {
-    document.getElementById('ios-guide').style.display = 'block';
-  }
-}
-
-// 페이지가 로드되었을 때 아이폰 체크 가이드 실행
-window.addEventListener('load', () => {
-  checkIosGuide();
-  
-  // 오프라인 저장을 위한 임시 서비스 워커 강제 패스 (인라인 가상 등록 처리)
-  if ('serviceWorker' in navigator) {
-    // 순수 인라인 완성형 구조 유지를 위해 별도의 sw.js 파일 없이도 실행 가능하도록 준비됨
-  }
-});
-</script>
 
 </body>
 </html>
